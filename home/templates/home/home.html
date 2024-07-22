@@ -1,0 +1,144 @@
+{% extends 'home/slider.html' %}
+
+{% block title %}
+PrimeBazaar - Home
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+
+    <!-- Grid of Product Cards -->
+    <div class="md:relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+        <!-- Card 1 -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-4">
+                <h3 class="text-xl font-bold">Men's</h3>
+                
+            </div>
+            <div class="flex flex-wrap p-2">
+                {% for shoe in men_shoes %}
+                <div class="flex flex-col items-start w-1/2 md:w-1/2 lg:w-1/2 p-1">
+                    {% if shoe.image %}
+                    <a href="{% url 'product:product_detail' product_name=shoe.name product_type=shoe.sub_category.sub_category_name pk=shoe.id %}">
+                        <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" class="w-full object-cover hover:scale">
+                    </a>
+                    {% endif %}
+                    <p class="text-sm text-gray-700">{{ shoe.name }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="p-4">
+                <a href="{% url 'product:product_list' subcategory_name='men' %}" class="text-blue-500">See more</a>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-4">
+                <h3 class="text-xl font-bold">Women's</h3>
+            </div>
+            <div class="flex flex-wrap p-2">
+                {% for shoe in women_shoes %}
+                <div class="flex flex-col justify-center items-start w-1/2 md:w-1/2 lg:w-1/2 p-1">
+                    {% if shoe.image %}
+                    <a href="{% url 'product:product_detail' product_name=shoe.name product_type=shoe.sub_category.sub_category_name pk=shoe.id %}">
+                        <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" class="w-full object-cover w-30 h-20">
+                    </a>
+                    {% endif %}
+                    <p class="text-sm text-gray-700">{{ shoe.name }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="p-4">
+                <a href="{% url 'product:product_list' subcategory_name='women' %}" class="text-blue-500">See more</a>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-4">
+                <h3 class="text-xl font-bold">Boy's</h3>
+            </div>
+            <div class="flex flex-wrap p-2">
+                {% for shoe in boys_shoes %}
+                <div class="flex flex-col items-start w-full p-1">
+                    {% if shoe.image %}
+                    <a href="{% url 'product:product_detail' product_name=shoe.name product_type=shoe.sub_category.sub_category_name pk=shoe.id %}">
+                        <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" class="w-full object-cover">
+                    </a>
+                    {% endif %}
+                    <p class="text-sm text-gray-700">{{ shoe.name }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="p-4">
+                <a href="{% url 'product:product_list' subcategory_name='boy' %}" class="text-blue-500">See more</a>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-4">
+                <h3 class="text-xl font-bold">Girl's</h3>
+            </div>
+            <div class="flex flex-wrap p-2">
+                {% for shoe in girls_shoes %}
+                <div class="flex flex-col items-start w-1/2 md:w-1/2 lg:w-1/2 p-1">
+                    {% if shoe.image %}
+                    <a href="{% url 'product:product_detail' product_name=shoe.name product_type=shoe.sub_category.sub_category_name pk=shoe.id %}">
+                        <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" class="w-full object-cover">
+                    </a>
+                    {% endif %}
+                    <p class="text-sm text-gray-700">{{ shoe.name }}</p>
+                </div>
+                {% endfor %}
+                
+            </div>
+            <div class="p-4">
+                <a href="{% url 'product:product_list' subcategory_name='girl' %}" class="text-blue-500">See more</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Horizontal Scrollable Section -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-4">
+        <div class="p-4">
+            <h3 class="text-xl font-bold">Top Selling Boys Shoes</h3>
+        </div>
+        <div class="flex gap-2 overflow-x-auto p-2">
+            {% for shoe in top_selling_boys_shoes %}
+            <div class="flex-shrink-0 w-40">
+                {% if shoe.image %}
+                    <a href="{% url 'product:product_detail' product_name=shoe.name product_type=shoe.sub_category.sub_category_name pk=shoe.id %}">
+                        <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" class=" h-28 w-full object-cover">
+                    </a>
+                    {% endif %}
+            </div>
+            {% endfor %}
+            <a href="{% url 'product:product_list' subcategory_name='boy' %}" class="text-blue-500 flex-shrink-0 px-2 py-11">more...</a>
+        </div>
+    </div>
+
+    
+
+    <!-- Horizontal Scrollable Section -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-4">
+        <div class="p-4">
+            <h3 class="text-xl font-bold">Top Selling Girls Shoes</h3>
+        </div>
+        <div class="flex gap-2 overflow-x-auto p-2">
+            {% for shoe in top_selling_girls_shoes %}
+            <div class="flex-shrink-0 w-40">
+                {% if shoe.image %}
+                    <a href="{% url 'product:product_detail' product_name=shoe.name product_type=shoe.sub_category.sub_category_name pk=shoe.id %}">
+                        <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" class="h-28 w-full object-cover">
+                    </a>
+                    {% endif %}
+            </div>
+            {% endfor %}
+            <a href="{% url 'product:product_list' subcategory_name='girl' %}" class="text-blue-500 flex-shrink-0 px-2 py-11">more...</a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

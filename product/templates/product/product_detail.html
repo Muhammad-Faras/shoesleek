@@ -1,0 +1,95 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div class="w-full flex flex-col lg:flex-row gap-2 px-2 py-4">
+    <!-- Sidebar with Image URL -->
+    <div class="p-2 w-full lg:w-1/4 flex flex-col">
+        <!-- Product Purchase Card -->
+        <div class="border border-gray-300 bg-white p-4 shadow-lg rounded-md">
+            <h2 class="text-xl font-bold mb-2">{{ product.name }}</h2>
+            <div class="flex flex-col gap-2">
+                <!-- Price -->
+                <div class="flex items-center mb-4">
+                    <span class="text-lg font-bold text-red-500">${{ product.price }}</span>
+                </div>
+                <!-- Quantity Selection -->
+                <form method="post" action="{% url 'product:add_to_cart' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="w-full bg-yellow-500 text-white px-4 py-2 hover:bg-yellow-600 transition duration-300 mb-2">Add to Cart</button>
+                </form>
+                <!-- Shipping and Seller Information -->
+                <div class="text-gray-700 text-sm mb-4">
+                    <p><span class="font-bold">Ships from:</span> PrimeBazaar.com</p>
+                    <p><span class="font-bold">Sold by:</span> PrimeBazaar.com</p>
+                </div>
+                <!-- Returns Policy -->
+                <div class="text-gray-700 text-sm mb-4">
+                    <p><span class="font-bold">Returns:</span> Eligible for Return, Refund or Replacement within 30 days of receipt</p>
+                </div>
+                <!-- Payment and Support -->
+                <div class="text-gray-700 text-sm">
+                    <p><span class="font-bold">Payment:</span> Secure transaction</p>
+                    <p><span class="font-bold">Support:</span> Product support included</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Section -->
+    <div class="w-full lg:w-3/4 flex flex-col gap-y-2">
+        <div class="flex flex-col lg:flex-row gap-4 border border-gray-300 bg-white">
+            <!-- Product Image -->
+            <div class="relative w-full lg:w-1/3 p-4">
+                <!-- Like Button -->
+                <button class="absolute left-3 top-4 bg-red-500 text-white w-10 h-10 flex items-center justify-center rounded-full hover:bg-red-600 transition duration-300">
+                    <i class="fas fa-heart text-sm"></i>
+                </button>
+                <img src="{{ product.image.url }}" alt="Product Image" class="bg-gray-100 w-full h-auto">
+            </div>
+            <!-- Product Info -->
+            <div class="lg:w-2/3 p-4">
+                <div class="mb-4">
+                    <h1 class="text-2xl font-bold">{{ product.name }}</h1>
+                    <p class="text-gray-600 text-sm">{{ product.description }}</p>
+                </div>
+                <!-- Price and Offer -->
+                <div class="flex items-center mb-4">
+                    <span class="text-3xl font-bold text-red-500">${{ product.price }}</span>
+                </div>
+                <div class="text-sm text-gray-600 mb-4">
+                    <h2 class="text-xl font-bold mb-2">About this Item</h2>
+                    <ul class="flex flex-col gap-2">
+                        <li class="font-bold">fabric_type: <span class="font-normal">{{ product.fabric_type }}</span></li>
+                        <li class="font-bold">origin: <span class="font-normal">{{ product.origin }}</span></li>
+                        <li class="font-bold">sole_material: <span class="font-normal">{{ product.sole_material }}</span></li>
+                        <li class="font-bold">outer_material: <span class="font-normal">{{ product.outer_material }}</span></li>
+                        <li class="font-bold">country_of_origin: <span class="font-normal">{{ product.country_of_origin }}</span></li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- More from frequently bought brands section -->
+<div class="relative w-full p-4 bg-white shadow-lg rounded-lg overflow-hidden mb-2">
+    <div class="pb-4">
+        <h3 class="text-2xl font-bold">More from frequently bought brands</h3>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <!-- Example Product Card -->
+        {% for shoe in other_shoes %}
+        <div class="bg-white rounded-lg p-4">
+            <a href="{% url 'product:product_detail' product_name=shoe.name product_type=shoe.sub_category.sub_category_name pk=shoe.id %}">
+                <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" class="w-full object-coverwomen_">
+            </a>
+            <a href="#" class="text-sm break-words text-blue-600 hover:text-red-500 hover:underline">{{shoe.name}}</a>
+            <p class="text-gray-700 text-xl font-bold">${{shoe.price}}</p>
+        </div>
+        {% endfor %}
+        
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Payment Success{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center">
+    <div class="bg-white shadow-md rounded-lg p-8 m-4">
+        <div class="text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <h2 class="text-2xl font-semibold text-gray-800 mt-4">Payment Successful!</h2>
+            <p class="text-gray-600 mt-2">Thank you for your purchase. Your order has been placed successfully.</p>
+            <a href="{% url 'home:home' %}">
+                <button class="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Buy More
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

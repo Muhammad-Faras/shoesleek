@@ -1,0 +1,67 @@
+{% extends 'home/base.html' %}
+
+{% block slider %}
+
+    <!-- Carousel Container -->
+    <div>
+        <div class="relative overflow-hidden max-h-96 mb-2"> <!-- Set max height to 24rem (96 * 4px) -->
+            <!-- Images Container -->
+            <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
+                <!-- Image 1 -->
+                <img src="https://m.media-amazon.com/images/S/aplus-media/vc/5018a81b-9f97-4f5b-b448-f6e61f6e5bde.__CR183,13,3151,975_PT0_SX970_V1___.png" alt="Image 2" class="min-w-full object-cover h-full">
+                
+                <!-- <div class="border bg-yellow-500 text-center min-w-full min-h-full">hello</div> -->
+                <img src="https://m.media-amazon.com/images/S/aplus-media/vc/a6e3b858-7daa-4eb0-882a-cb3c456f071f.__CR150,0,1914,592_PT0_SX970_V1___.png" alt="Image 1" class="min-w-full object-cover h-full">
+                <!-- Image 2 -->
+                <!-- Image 3 -->
+                <img src="data:image/jpeg;base64,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" alt="Image 3" class="min-w-full object-cover h-full">
+            </div>
+            
+            <!-- Previous Button -->
+            <button id="prevBtn" class="py-14 px-4 absolute left-0 top-2 md:top-14 text-white p-2 hover:bg-gray-800 hover:bg-opacity-50 focus:outline-none">
+                <i class="fas fa-chevron-left text-4xl"></i>
+            </button>
+            
+            <!-- Next Button -->
+            <button id="nextBtn" class="py-14 px-4 text-center absolute right-0 top-0 md:top-14 text-white p-2 hover:bg-gray-800 hover:bg-opacity-25 focus:outline-none">
+                <i class="fas fa-chevron-right text-4xl"></i>
+            </button>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const carousel = document.getElementById('carousel');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let index = 0;
+
+        // Get the number of images
+        const images = carousel.querySelectorAll('img');
+        const totalImages = images.length;
+
+        // Update the transform property to show the image at the given index
+        const updateCarousel = () => {
+            const offset = -index * 100;
+            carousel.style.transform = `translateX(${offset}%)`;
+        };
+
+        // Show next image
+        nextBtn.addEventListener('click', () => {
+            index = (index + 1) % totalImages;
+            updateCarousel();
+        });
+
+        // Show previous image
+        prevBtn.addEventListener('click', () => {
+            index = (index - 1 + totalImages) % totalImages;
+            updateCarousel();
+        });
+    });
+</script>
+
+{% endblock%}

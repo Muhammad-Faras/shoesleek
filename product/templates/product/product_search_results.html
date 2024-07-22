@@ -1,0 +1,49 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div class="w-full  flex flex-row gap-2 px-2 py-4 bg-white">
+    
+
+
+    <!-- Product Detail Section -->
+  <div class=" w-full flex flex-col gap-y-2">
+    {% for product in products_list %}
+      <div class="flex flex-col items-center lg:flex-row gap-4 border border-gray-300 bg-white">
+          <!-- Product Image -->
+          {% if product.image %}
+          <div class="px-4 py-2 w-full md:w-1/4 ">
+            <img src="{{ product.image.url }}" alt="Product Image" class="object-cover h-44 w-30 md:w-34 bg-gray-100">
+          </div>
+          {% endif %}
+          <!-- Product Info -->
+          <div class="lg:w-3/4">
+            <div class="mb-4">
+             <h1 class=" text-2xl font-bold">{{ product.name }}</h1>
+             <a href="{% url 'product:product_detail' product_name=product.name product_type=product.sub_category.sub_category_name pk=product.pk %}"><p class="hover:text-red-500 text-gray-600 text-lg font-medium">{{ product.description }}</p></a>
+            </div>
+            
+            <!-- Price and Offer -->
+            <div class="flex items-center mb-4">
+              <span class="text-3xl font-bold text-gray-800">${{product.price}}</span>
+            </div>
+           
+            <div class="flex items-center gap-2 mb-2">
+              <form method="post" action="{% url 'product:add_to_cart' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="w-full bg-yellow-500 text-white px-4 py-2 hover:bg-yellow-600 transition duration-300 mb-2">Add to Cart</button>
+            </form>
+                          <!-- Like Button -->
+              <button class="bg-red-500 text-white w-10 h-10 flex items-center justify-center rounded-full hover:bg-red-600 transition duration-300">
+                <i class="fas fa-heart text-sm"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+</div>
+</div>
+
+
+
+{% endblock %}
